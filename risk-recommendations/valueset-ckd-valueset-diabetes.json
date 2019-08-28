@@ -1,0 +1,29 @@
+{
+	"resourceType": "ValueSet",
+	"id": "ckd-valueset-diabetes",
+	"name": "DiabetesFindingCodes",
+	"title": "Diabetes Finding Codes",
+	"status": "active",
+	"compose": {
+		"include": [
+			{
+				"system": "http://snomed.info/sct",
+				"concept": [
+					{
+						"code": "73211009"
+					}
+				]
+			},
+			{
+				"system": "http://snomed.info/sct",
+				"filter": [
+					{
+						"property": "concept",
+						"op": "is-a",
+						"value": "73211009"
+					}
+				]
+			}
+		]
+	}
+}

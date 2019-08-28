@@ -1,0 +1,25 @@
+{
+	"resourceType": "ValueSet",
+	"id": "ckd-valueset-creatinine",
+	"name": "CreatinineLabResults",
+	"title": "Creatinine Lab Results",
+	"status": "active",
+	"compose": {
+		"include": [
+			{
+				"system": "http://loinc.org",
+				"concept": [
+					{
+						"code": "77140-2"
+					},
+					{
+						"code": "14682-9"
+					},
+					{
+						"code": "2160-0"
+					}
+				]
+			}
+		]
+	}
+}
