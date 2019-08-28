@@ -45,7 +45,7 @@ The Kidney Disease: Improving Global Outcomes (KDIGO) 2012 Clinical Practice Gui
 
 | CKD Guideline Algorithm |
 | --- |
-| ![CKD guideline algorithm](images/ckd-cpg-algorithm.png) |
+| ![CKD guideline algorithm](va-cpg/ckd-cpg-algorithm.png) |
 
 ## Guideline Recommendations
 The following CKD guideline recommendations are copied verbatim from the VA/DoD guideline and will be used to create an example implementation using FHIR and CQL. The provided examples do not yet cover these recommendations.
