@@ -180,7 +180,7 @@
               "description": "Formulary",
               "requiredBehavior": "could",
               "precheckBehavior": "no",
-              "definitionCanonical": "http://hl7.org/fhir/uv/cpg/ActivityDefinition/34387258"
+              "definitionCanonical": "http://hl7.org/fhir/uv/cpg/ActivityDefinition/cc-cpg-activity-med-lisinopril"
             }
           ]
         },

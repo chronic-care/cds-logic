@@ -1,0 +1,79 @@
+{
+  "resourceType": "ActivityDefinition",
+  "id": "cc-cpg-activity-med-lisinopril",
+  "url": "http://hl7.org/fhir/uv/cpg/ActivityDefinition/cc-cpg-activity-med-lisinopril",
+  "version": "0",
+  "name": "ElsevierUsOrder34387258",
+  "title": "Lisinopril 20 MG Oral Tablet; 1 tablet(s) 1 time a day (dispense 30 tablet(s); 3 refills)",
+  "status": "active",
+  "experimental": false,
+  "publisher": "Elsevier Inc",
+  "description": "Lisinopril 20 MG Oral Tablet; 1 tablet(s) 1 time a day (dispense 30 tablet(s); 3 refills)",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America",
+          "userSelected": false
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "kind": "MedicationRequest",
+  "code": {
+    "coding": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "code": "314077",
+        "display": "Lisinopril 20 MG Oral Tablet"
+      }
+    ]
+  },
+  "timingTiming": {
+    "repeat": {
+      "frequency": 1,
+      "period": 1,
+      "periodUnit": "d"
+    }
+  },
+  "quantity": {
+    "value": 30,
+    "unit": "Tablet"
+  },
+  "dosage": [
+    {
+      "additionalInstruction": [
+        {
+          "text": "1 time a day"
+        }
+      ],
+      "route": {
+        "text": "Oral"
+      },
+      "method": {
+        "text": "Tablet"
+      },
+      "doseAndRate": [
+        {
+          "doseQuantity": {
+            "value": 1,
+            "unit": "tablet(s)"
+          }
+        }
+      ]
+    }
+  ],
+  "dynamicValue": [
+    {
+      "path": "dispenseRequest.numberOfRepeatsAllowed",
+      "expression": {
+        "description": "dispenseRequest.numberOfRepeatsAllowed is 3",
+        "language": "text/cql",
+        "expression": "3"
+      }
+    }
+  ]
+}
