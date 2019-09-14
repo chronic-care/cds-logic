@@ -37,12 +37,16 @@ define "CKD or Diabetes Dx":
   "Chronic Kidney Disease Dx" union "Diabetes Dx"
 
 define "Chronic Kidney Disease Dx":
-  [Condition: code in "Chronic Kidney Disease"] condition
-    where condition.clinicalStatus.value in { 'active', 'recurrence' }
+  [Condition: code in "Chronic Kidney Disease"] C
+    where exists ( C.clinicalStatus.coding Coding
+            where Coding.code = 'active'
+          )
 
 define "Diabetes Dx":
-  [Condition: code in "Diabetes mellitus"] condition
-    where condition.clinicalStatus.value in { 'active', 'recurrence' }
+  [Condition: code in "Diabetes mellitus"] C
+  where exists ( C.clinicalStatus.coding Coding
+            where Coding.code = 'active'
+          )
 
 // Laboratory observations
 //
