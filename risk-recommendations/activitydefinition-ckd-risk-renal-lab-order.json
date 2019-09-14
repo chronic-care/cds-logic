@@ -7,7 +7,7 @@
   "title": "Order Renal Lab Panel",
   "description": "Create ServiceRequest to order Renal lab panel.",
   "library": [
-    "Library/ckd-risk-recommendations"
+    "http://hl7.org/fhir/uv/cpg/Library/ckd-risk-recommendations"
   ],
   "kind": "ServiceRequest",
   "code": {

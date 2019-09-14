@@ -7,7 +7,7 @@
   "title": "Referral to Nephrologist",
   "description": "Create ServiceRequest to order Referral for nephrology.",
   "library": [
-    "Library/ckd-risk-recommendations"
+    "http://hl7.org/fhir/uv/cpg/Library/ckd-risk-recommendations"
   ],
   "kind": "ServiceRequest",
   "code": {

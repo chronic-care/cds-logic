@@ -76,7 +76,7 @@
     }
   ],
   "library": [
-    "Library/ckd-risk-recommendations"
+    "http://hl7.org/fhir/uv/cpg/Library/ckd-risk-recommendations"
   ],
   "action": [
     {
