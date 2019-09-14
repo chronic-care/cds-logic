@@ -3,6 +3,7 @@
 # PUT a specifiec list of new or updated resources to a FHIR endpoint
 # . load-all.sh https://api-v8-r4.hspconsortium.org/CarePlanningR4/open
 
+. ./put-resource.sh $1 Library library-fhir-helpers FHIRHelpers
 . ./put-resource.sh $1 Library ckd-risk-recommendations library-ckd-risk-recommendations
 . ./put-resource.sh $1 PlanDefinition ckd-risk-screening plandefinition-ckd-risk-screening
 
