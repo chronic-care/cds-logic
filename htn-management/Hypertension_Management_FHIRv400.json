@@ -1,0 +1,347 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "Hypertension_Management_FHIRv400",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.0"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localIdentifier" : "CBP",
+            "path" : "ControllingHighBloodPressure_FHIRv400",
+            "version" : "1.0.0"
+         }, {
+            "localIdentifier" : "C3F",
+            "path" : "CDS_Connect_Commons_for_FHIRv400",
+            "version" : "1.0.1"
+         }, {
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.0"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "name" : "InclusionMedicationsLookbackPeriod",
+            "accessLevel" : "Public",
+            "default" : {
+               "value" : 90,
+               "unit" : "days",
+               "type" : "Quantity"
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "SNOMED-CT",
+            "id" : "http://snomed.info/sct",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "name" : "ACE Inhibitor or ARB or ARNI",
+            "id" : "2.16.840.1.113883.3.526.2.39",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Hypertension",
+            "id" : "2.16.840.1.113883.3.464.1003.104.12.1016",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Chronic Kidney Disease All Stages",
+            "id" : "2.16.840.1.113762.1.4.1222.159",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "name" : "Blood pressure",
+            "id" : "85354-9",
+            "display" : "Blood pressure systolic and diastolic",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "Systolic blood pressure",
+            "id" : "8480-6",
+            "display" : "Systolic blood pressure",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "Diastolic blood pressure",
+            "id" : "8462-4",
+            "display" : "Diastolic blood pressure",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Chronic Kidney Disease Conditions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "Confirmed",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "ActiveOrRecurring",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}Condition",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Chronic Kidney Disease All Stages",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "Has CKD diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "Chronic Kidney Disease Conditions",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "Hypertension Conditions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "name" : "Confirmed",
+               "libraryName" : "C3F",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "ActiveOrRecurring",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "dataType" : "{http://hl7.org/fhir}Condition",
+                     "codeProperty" : "code",
+                     "type" : "Retrieve",
+                     "codes" : {
+                        "name" : "Hypertension",
+                        "type" : "ValueSetRef"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "name" : "Has Hypertension diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "Hypertension Conditions",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "name" : "Has Uncontrolled Hypertension",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Or",
+               "operand" : [ {
+                  "name" : "Has Systolic Blood Pressure Greater Than 140",
+                  "libraryName" : "CBP",
+                  "type" : "ExpressionRef"
+               }, {
+                  "name" : "Has Diastolic Blood Pressure Greater Than 90",
+                  "libraryName" : "CBP",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "name" : "Has Suspected Hypertension",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [ {
+                  "name" : "Has Uncontrolled Hypertension",
+                  "type" : "ExpressionRef"
+               }, {
+                  "type" : "Not",
+                  "operand" : {
+                     "name" : "Has Hypertension diagnosis",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Has Recent Antihypertensive Medication",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Exists",
+               "operand" : {
+                  "name" : "ActiveCompletedOrStoppedMedicationRequest",
+                  "libraryName" : "C3F",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "name" : "MedicationRequestLookBack",
+                     "libraryName" : "C3F",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "codeProperty" : "medication",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "name" : "ACE Inhibitor or ARB or ARNI",
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "name" : "InclusionMedicationsLookbackPeriod",
+                        "type" : "ParameterRef"
+                     } ]
+                  } ]
+               }
+            }
+         }, {
+            "name" : "Recommend Antihypertensive Medication",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [ {
+                  "name" : "Has Uncontrolled Hypertension",
+                  "type" : "ExpressionRef"
+               }, {
+                  "type" : "Not",
+                  "operand" : {
+                     "name" : "Has Recent Antihypertensive Medication",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "name" : "SuspectedHypertensionTitle",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Suspected Hypertension",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "SuspectedHypertensionDetail",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "This patient may have undiagnosed hypertension",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "SuspectedHypertensionSeverity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "warning",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "UncontrolledHypertensionTitle",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Has Uncontrolled Hypertension",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "UncontrolledHypertensionDetail",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "This patient has uncontrolled hypertension",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "UncontrolledHypertensionSeverity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "warning",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "RecommendAntihypertensiveTitle",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Recommend ACE Inhibitor or ARB",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "RecommendAntihypertensiveDetail",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "Recommend ordering ACE Inhibitor or ARB for this patient.",
+               "type" : "Literal"
+            }
+         }, {
+            "name" : "RecommendAntihypertensiveSeverity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "info",
+               "type" : "Literal"
+            }
+         } ]
+      }
+   }
+}
+
