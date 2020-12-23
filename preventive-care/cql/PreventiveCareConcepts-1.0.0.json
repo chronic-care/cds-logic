@@ -1,0 +1,116 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "PreventiveCareConcepts",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "SNOMED-CT",
+            "id" : "http://snomed.info/sct",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "name" : "Prostate Specific Antigen Test",
+            "id" : "2.16.840.1.113883.3.526.2.215",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Hypertension",
+            "id" : "2.16.840.1.113883.3.464.1003.104.12.1016",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Pregnancy",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Pregnancy (New ICD10 codes published in 2018 or later)",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.74",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Race Category",
+            "id" : "2.16.840.1.113883.3.2074.1.1.3",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "name" : "Prostate cancer",
+            "id" : "254900004",
+            "display" : "Carcinoma of prostate (disorder)",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Family history of prostate cancer",
+            "id" : "414205003",
+            "display" : "Family history of prostate cancer (situation)",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Pregnancy status code",
+            "id" : "82810-3",
+            "display" : "Pregnancy status",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "Pregnant code",
+            "id" : "77386006",
+            "display" : "Patient currently pregnant (finding)",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED-CT"
+            }
+         }, {
+            "name" : "Blood pressure",
+            "id" : "85354-9",
+            "display" : "Blood pressure systolic and diastolic",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "Systolic blood pressure",
+            "id" : "8480-6",
+            "display" : "Systolic blood pressure",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         }, {
+            "name" : "Diastolic blood pressure",
+            "id" : "8462-4",
+            "display" : "Diastolic blood pressure",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "LOINC"
+            }
+         } ]
+      }
+   }
+}
+
