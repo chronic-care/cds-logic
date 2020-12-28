@@ -86,7 +86,7 @@
           }
         ]
       },
-      "definitionCanonical": "ActivityDefinition/activitydefinition-htn-medication",
+      "definitionCanonical": "http://github.com/chronic-care/fhir/ActivityDefinition/htn-medication",
       "dynamicValue": [
         {
           "path": "action.title",

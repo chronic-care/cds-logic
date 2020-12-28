@@ -80,6 +80,9 @@ define "Has Suspected Hypertension":
   "Has Uncontrolled Hypertension"
   and not "Has Hypertension diagnosis"
 
+define "Needs Updated Blood Pressure":
+  not exists(CBP."Qualifying Systolic Blood Pressure Reading")
+  or not exists(CBP."Qualifying Diastolic Blood Pressure Reading")
 
 // Determines if the patient has any record of Antihypertensive medications in the lookback period
 //       - Medication Request within lookback period (currently 90 days)

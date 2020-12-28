@@ -32,6 +32,12 @@
     },
     {
       "type": "Observation"
+    },
+    {
+      "type": "MedicationRequest"
+    },
+    {
+      "type": "Goal"
     }
   ],
   "content": [

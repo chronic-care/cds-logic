@@ -22,6 +22,11 @@
       "resource" : "Library/library-fhir-helpers"
     }
   ],
+  "dataRequirement": [
+    {
+      "type": "Observation"
+    }
+  ],
   "content": [
     {
       "contentType": "text/cql",

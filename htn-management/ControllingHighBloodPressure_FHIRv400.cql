@@ -1,7 +1,10 @@
 library ControllingHighBloodPressure_FHIRv400 version '1.0.0'
 
 /*
-Controlling High Blood Pressure (CBP)
+	Controlling High Blood Pressure (CBP)
+
+	Adapted from eCQM EXM165
+	http://build.fhir.org/ig/cqframework/draft-measures/examples.html
 */
 
 using FHIR version '4.0.0'
@@ -10,7 +13,6 @@ include FHIRHelpers version '4.0.0'
 
 codesystem "LOINC": 'http://loinc.org'
 
-code "Birth date": '21112-8' from "LOINC" display 'Birth date'
 code "Blood pressure": '85354-9' from "LOINC" display 'blood pressure'
 code "Diastolic blood pressure": '8462-4' from "LOINC" display 'Diastolic blood pressure'
 code "Systolic blood pressure": '8480-6' from "LOINC" display 'Systolic blood pressure'
@@ -51,19 +53,20 @@ define "Has Systolic Blood Pressure Less Than 140":
 define "Lowest Diastolic Reading on Most Recent Blood Pressure Day":
 	Last(
     "Qualifying Diastolic Blood Pressure Reading" DBPReading
-//		  where DBPReading.effective same day as "Most Recent Blood Pressure Day"
+		  where DBPReading.effective same day as "Most Recent Blood Pressure Day"
       return singleton from (
         DBPReading.component C
           where C.code ~ ToConcept("Diastolic blood pressure")
           return C.value as Quantity
       )
 			/* sort ascending */
+			// TODO CQL runtime error on sort, Quantity is not comparable
 	)
 
 define "Lowest Systolic Reading on Most Recent Blood Pressure Day":
 	Last(
     "Qualifying Systolic Blood Pressure Reading" SBPReading
-//		  where SBPReading.effective same day as "Most Recent Blood Pressure Day"
+		  where SBPReading.effective same day as "Most Recent Blood Pressure Day"
       return singleton from (
         SBPReading.component C
           where C.code ~ ToConcept("Systolic blood pressure")
@@ -87,11 +90,11 @@ define "Most Recent Blood Pressure Day":
 define "Qualifying Diastolic Blood Pressure Reading":
 	[Observation: "Blood pressure"] BloodPressure
 	  where BloodPressure.status in {'final', 'amended'}
-//      and BloodPressure.effective during "Measurement Period"
-//	    and not (GetEncounter(BloodPressure.encounter).class.code in { 'EMER', 'IMP', 'ACUTE', 'NONAC', 'PRENC', 'SS' })
+      and BloodPressure.effective during "Measurement Period"
+      // TODO: Turn this into a value set
+	    and not (GetEncounter(BloodPressure.encounter).class.code in { 'EMER', 'IMP', 'ACUTE', 'NONAC', 'PRENC', 'SS' })
       and exists (
         BloodPressure.component DiastolicBP
-          //where FHIRHelpers.ToConcept(DiastolicBP.code) ~ "Diastolic blood pressure"
 	        where DiastolicBP.code ~ ToConcept("Diastolic blood pressure")
 //            and DiastolicBP.value.unit = 'mm[Hg]'
 // TODO: CQL translation error on above: Error:[82:35, 82:38] name cannot be null
@@ -100,12 +103,10 @@ define "Qualifying Diastolic Blood Pressure Reading":
 define "Qualifying Systolic Blood Pressure Reading":
 	[Observation: "Blood pressure"] BloodPressure
 	  where BloodPressure.status in {'final', 'amended'}
-//      and BloodPressure.effective during "Measurement Period"
-      // TODO: Turn this into a value set
-//	    and not (GetEncounter(BloodPressure.encounter).class.code in { 'EMER', 'IMP', 'ACUTE', 'NONAC', 'PRENC', 'SS'})
+      and BloodPressure.effective during "Measurement Period"
+	    and not (GetEncounter(BloodPressure.encounter).class.code in { 'EMER', 'IMP', 'ACUTE', 'NONAC', 'PRENC', 'SS'})
       and exists (
         BloodPressure.component SystolicBP
-          //where FHIRHelpers.ToConcept(SystolicBP.code) ~ "Systolic blood pressure"
 	        where SystolicBP.code ~ ToConcept("Systolic blood pressure")
 //            and SystolicBP.value.unit = 'mm[Hg]'
       )
