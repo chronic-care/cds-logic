@@ -102,6 +102,12 @@
             "state": "VA",
             "country": "USA"
           }
+        ],
+        "generalPractitioner": [
+          {
+            "reference": "Practitioner/va-prac-visn6-francis",
+            "display": "Dr. Francis, MD"
+          }
         ]
       }
     }
