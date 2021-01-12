@@ -14,8 +14,6 @@ using FHIR version '4.0.1'
 include FHIRHelpers version '4.0.1' called FHIRHelpers
 // The CDS Connect Commons for FHIRv400 library provides functions representing commonly used CDS logic and patterns.
 include CDS_Connect_Commons_for_FHIRv400 version '1.0.2' called C3F
-// The CDS_Reporting library provides common functions for summarizing and reporting clinical data
-include CDS_Reporting_FHIRv400 version '1.0.0' called RPT
 // The PreventiveCareConcepts library provides terminology concepts used to identify data elements throughout the artifact.
 include PreventiveCareConcepts version '1.0.0' called PCC
 
@@ -49,7 +47,7 @@ define "Race is African American":
 define "Patient is 40 or older":
   AgeInYears() >= 40
 
-// Returns a Reference
+// Returns a FHIR.Reference, or null if not present.
 define "Patient PCP":
   First(Patient.generalPractitioner)
 

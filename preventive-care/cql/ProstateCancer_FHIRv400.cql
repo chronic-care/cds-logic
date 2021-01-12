@@ -14,8 +14,6 @@ using FHIR version '4.0.1'
 include FHIRHelpers version '4.0.1' called FHIRHelpers
 // The CDS Connect Commons for FHIRv400 library provides functions representing commonly used CDS logic and patterns.
 include CDS_Connect_Commons_for_FHIRv400 version '1.0.2' called C3F
-// The CDS_Reporting library provides common functions for summarizing and reporting clinical data
-include CDS_Reporting_FHIRv400 version '1.0.0' called RPT
 // The PreventiveCareConcepts library provides terminology concepts used to identify data elements throughout the artifact.
 include PreventiveCareConcepts version '1.0.0' called PCC
 // The PreventiveCareData library provides common data retrieval logic for preventive care guidelines.
@@ -45,7 +43,7 @@ define "Last PSA":
   C3F.MostRecent("PSA Observations")
 
 define "Last PSA value":
-  C3F.QuantityValue("Last PSA")
+  C3F.QuantityValue("Last PSA").value
 
 define "Last PSA date":
   C3F.FindDate("Last PSA")
@@ -66,6 +64,18 @@ define "Has high PSA value":
 define "Last PSA value is high":
   "Last PSA value" > 4.0
 
+/*
+ * Patient messages containing embedded content from the above clinical data.
+ */
+
+// # Next Steps #
+
+define "Next Step 1":
+  'Talk with ' + Data."Patient PCP name" + ' about whether you need another PSA test now.'
+
+define "Next Step 4":
+  'Learn about PSA testing and think about whether you want another test after ' + ToString("Last PSA date" + 2 years)
+
 // # Text Variables #
 
 define "PC Status":
@@ -82,6 +92,9 @@ define "MI PSA Date 1":
   else if "Has PSA test"
     then Data."Patient PCP name" + '\'s record states that you last had a PSA test on ' + ToString("Last PSA date") + '.  You may be due for another PSA test.'
   else Data."Patient PCP name" + ' does not have a record of when your last PSA was.'
+
+define "PSA value 1":
+  'Your last PSA value was ' + ToString("Last PSA value") + '. Generally, a PSA below 4 is considered good. Higher values may be, OK if they are not increasing over time.'
 
 // # PSA risk statements #
 
